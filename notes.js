@@ -14,7 +14,8 @@ var addNote = (title, body) => {
 
 	if (duplicateNotes.length === 0 ) {
 		notes.push(note);
-		fs.writeFileSync('notes-data.json' , JSON.stringify(notes));
+		saveNotes(notes);
+		console.log('Note created with title: ', title, 'body: ', body);
 	} else {
 		console.log('Note already exists with title: ', title);
 	}
@@ -22,7 +23,7 @@ var addNote = (title, body) => {
 }
 
 var getAll = () => {
-	console.log('Getting all notes');
+	return retrieveAllNotes();
 }
 
 var getNote = (title) => {
@@ -38,12 +39,23 @@ var retrieveAllNotes = () => {
 		var notesString = fs.readFileSync('notes-data.json');
 		notes = JSON.parse(notesString);
 	}catch(e) {
-		console.log(e);
+		//console.log(e);
 		console.log("File notes-data.json doesn't exist.");
 		notes = [];
 	}
 	return notes;
 }
+
+var saveNotes = (notes) => {
+	try {
+		fs.writeFileSync('notes-data.json' , JSON.stringify(notes));
+	}catch(e) {
+		console.log('An error occurred');
+	}
+
+}
+
+
 module.exports = {
 	addNote,
 	getAll,
