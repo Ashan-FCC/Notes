@@ -9,7 +9,7 @@ var addNote = (title, body) => {
 	var note = {
 		title,
 		body
-	};
+	}
 
 	var duplicateNotes =  notes.filter((note) => note.title === title);
 
@@ -52,7 +52,7 @@ var retrieveAllNotes = () => {
 		var notesString = fs.readFileSync('notes-data.json');
 		notes = JSON.parse(notesString);
 	}catch(e) {
-		//console.log(e);
+		
 		console.log("File notes-data.json doesn't exist.");
 		notes = [];
 	}
@@ -70,9 +70,11 @@ var saveNotes = (notes) => {
 
 var logNote = (note) => {
 	debugger;
-		console.log(' -- ');
+		console.log(' *************** ');
 		console.log(`Title: ${note.title}`);
 		console.log(`Body: ${note.body}`);
+		console.log(' ***************');
+		console.log(' ');
 }
 
 
